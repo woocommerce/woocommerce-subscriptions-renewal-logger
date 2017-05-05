@@ -65,6 +65,11 @@ class WCS_Renewal_Logger {
 
 		self::log( 'Action hook: ' . $payment_gateway_hook . ' has hook? ' . var_export( has_action( $payment_gateway_hook ),true ) );
 
+		// Make sure gateways are setup to see if that affects it
+		WC()->payment_gateways();
+
+		self::log( 'NOW Action hook: ' . $payment_gateway_hook . ' has hook? ' . var_export( has_action( $payment_gateway_hook ), true ) );
+
 		add_action( 'wc_payment_gateway_' . $subscription->get_payment_method() . '_payment_processed', __CLASS__ . '::gateway_payment_complete', 10, 1 );
 
 		add_action( $payment_gateway_hook, __CLASS__ . '::gateway_triggered', -1000, 2 );
