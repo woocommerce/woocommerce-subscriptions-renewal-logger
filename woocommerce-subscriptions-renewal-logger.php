@@ -31,6 +31,13 @@
  * @since		1.0
  */
 
+require_once( 'includes/class-pp-dependencies.php' );
+
+if ( false === PP_Dependencies::is_subscriptions_active( '2.3' ) ) {
+	PP_Dependencies::enqueue_admin_notice( 'WooCommerce Subscriptions - Renewal Logger', 'WooCommerce Subscriptions', '2.3' );
+	return;
+}
+
 class WCS_Renewal_Logger {
 
 	private static $logger = null;

@@ -11,4 +11,4 @@ To view the log file:
 
 ### Requirements
 
-Requires WooCommmerce 3.0 or newer and Subscriptions 2.2.0 or newer.
+Requires WooCommmerce 3.0 or newer and Subscriptions 2.3.0 or newer.
