@@ -31,6 +31,13 @@
  * @since		1.0
  */
 
+require_once( 'includes/class-pp-dependencies.php' );
+
+if ( false === PP_Dependencies::is_subscriptions_active( '2.3' ) ) {
+	PP_Dependencies::enqueue_admin_notice( 'WooCommerce Subscriptions - Renewal Logger', 'WooCommerce Subscriptions', '2.3' );
+	return;
+}
+
 class WCS_Renewal_Logger {
 
 	private static $logger = null;
@@ -214,10 +221,10 @@ class WCS_Renewal_Logger {
 			self::log( 'ERROR: Renewal order passed is non-object (filtered): ' . var_export( $renewal_order, true ) );
 		}
 
-		// if we got a last order which does not match, log what is returned by get_related_orders_query
+		// if we got a last order which does not match, log what is returned by get_related_order_ids()
 		if ( $last_order_id != self::$processing_renewal_order ) {
-			$renewal_orders = $subscription->get_related_orders_query( $subscription->get_id() );
-			self::log( 'ERROR: Processing renewal order: ' . self::$processing_renewal_order . ' but got sent ' . $last_order_id . ' calling get_related_orders_query got ' . print_r( $renewal_orders, true ) );
+			$renewal_order_ids = WCS_Related_Order_Store::instance()->get_related_order_ids( $subscription, 'renewal' );
+			self::log( 'ERROR: Processing renewal order: ' . self::$processing_renewal_order . ' but got sent ' . $last_order_id . ' calling WCS_Related_Order_Store::instance()->get_related_order_ids() got ' . print_r( $renewal_order_ids, true ) );
 		}
 
 		return $last_order;

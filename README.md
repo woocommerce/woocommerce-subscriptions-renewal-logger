@@ -11,4 +11,10 @@ To view the log file:
 
 ### Requirements
 
-Requires WooCommmerce 3.0 or newer and Subscriptions 2.2.0 or newer.
+Requires WooCommmerce 3.0 or newer and Subscriptions 2.3.0 or newer.
+
+### Caveat
+
+This plugin is a diagnostic tool that should be used only for active monitoring on a site. Do you leave it active indefinitely on a site, especially not a live site or a site with a large number of subscriptions.
+
+For best results, enable the plugin for 5-10 minutes at a time. Then disbale it and review the logs.
