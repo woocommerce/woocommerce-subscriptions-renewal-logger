@@ -15,6 +15,6 @@ Requires WooCommmerce 3.0 or newer and Subscriptions 2.3.0 or newer.
 
 ### Caveat
 
-This plugin is a diagnostic tool that should be used only for active monitoring on a site. Do you leave it active indefinitely on a site, especially not a live site or a site with a large number of subscriptions.
+This plugin is a diagnostic tool that should be used only for active monitoring on a site. Do not leave it active indefinitely on a site, especially not on a live site or a site with a large number of subscriptions.
 
-For best results, enable the plugin for 5-10 minutes at a time. Then disbale it and review the logs.
+For best results, enable the plugin for 5-10 minutes at a time. Then disable it and review the logs.
