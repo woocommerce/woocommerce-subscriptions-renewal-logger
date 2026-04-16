@@ -1,5 +1,7 @@
 <?php
 
+defined( 'ABSPATH' ) || exit;
+
 if ( ! class_exists( 'PP_Dependencies' ) ) :
 
 /**
@@ -180,12 +182,7 @@ class PP_Dependencies {
 	 * @return string
 	 */
 	protected static function str_to_ascii( $string ) {
-
-		// strip ASCII chars 32 and under
-		$string = filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW );
-
-		// strip ASCII chars 127 and higher
-		return filter_var( $string, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH );
+		return preg_replace( '/[^\x21-\x7E]/', '', $string );
 	}
 
 }
