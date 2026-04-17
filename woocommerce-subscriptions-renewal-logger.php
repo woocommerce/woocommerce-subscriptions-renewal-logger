@@ -126,7 +126,6 @@ class WCS_Renewal_Logger {
 		self::log( 'Subscription total          = ' . $subscription->get_total() );
 		self::log( 'Subscription payment method = ' . $subscription->get_payment_method() );
 		self::log( 'Subscription customer_id    = ' . $subscription->get_customer_id() );
-		self::log( 'Subscription billing email  = ' . $subscription->get_billing_email() );
 
 		if ( ! did_action( 'woocommerce_init' ) ) {
 			self::log( 'ERROR: woocommerce_init has not been called yet' );
@@ -188,7 +187,6 @@ class WCS_Renewal_Logger {
 		self::log( 'Renewal order payment method: ' . $last_order->get_payment_method() );
 		self::log( 'Renewal order payment method title: ' . $last_order->get_payment_method_title() );
 		self::log( 'Renewal order customer_id: ' . $last_order->get_customer_id() );
-		self::log( 'Renewal order billing email: ' . $last_order->get_billing_email() );
 
 		if ( 0 === $last_order->get_customer_id() && 0 !== $subscription->get_customer_id() ) {
 			self::log( 'WARNING: Renewal order has customer_id=0 but subscription has customer_id=' . $subscription->get_customer_id() . '. Possible HPOS sync data corruption.' );
@@ -312,6 +310,10 @@ class WCS_Renewal_Logger {
 		if ( $renewal_order instanceof WC_Order ) {
 			self::log( 'Renewal order id (filtered): ' . $renewal_order->get_id() );
 			self::log( 'Renewal order customer_id (filtered): ' . $renewal_order->get_customer_id() );
+
+			if ( $subscription instanceof WC_Subscription && $renewal_order->get_customer_id() !== $subscription->get_customer_id() ) {
+				self::log( 'WARNING: customer_id mismatch after filtering. Renewal=' . $renewal_order->get_customer_id() . ' Subscription=' . $subscription->get_customer_id() );
+			}
 		} else {
 			self::log( 'ERROR: Renewal order passed is non-object (filtered): ' . gettype( $renewal_order ) );
 		}
