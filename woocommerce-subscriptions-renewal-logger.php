@@ -145,8 +145,6 @@ class WCS_Renewal_Logger {
 		add_action( $payment_gateway_hook, __CLASS__ . '::gateway_triggered', -1000, 2 );
 		add_action( $payment_gateway_hook, __CLASS__ . '::gateway_triggered_after', 1000, 2 );
 
-		add_filter( 'wc_payment_gateway_' . $subscription->get_payment_method() . '_process_payment', __CLASS__ . '::gateway_processing_payment', 1000, 2 );
-
 		add_action( 'deleted_transient', __CLASS__ . '::deleted_transient', 10, 1 );
 	}
 
@@ -198,8 +196,6 @@ class WCS_Renewal_Logger {
 
 		self::log( 'Ended processing scheduled payment for: ' . $subscription_id );
 		self::log( '-------------------------------------------------------------' );
-
-		remove_filter( 'wc_payment_gateway_' . $subscription->get_payment_method() . '_process_payment', __CLASS__ . '::gateway_processing_payment', 1000 );
 
 		remove_action( 'deleted_transient', __CLASS__ . '::deleted_transient', 10 );
 	}
